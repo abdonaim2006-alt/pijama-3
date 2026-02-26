@@ -104,26 +104,24 @@ function ProductContent() {
             </div>
             
             {/* Detail Images */}
-            <div className="w-full grid grid-cols-2 gap-3">
-              {product.details && (
-                <>
-                  <div className="aspect-square bg-gradient-to-br from-muted to-muted-foreground rounded-lg overflow-hidden">
-                    <img 
-                      src={product.details.image1}
-                      alt={`Détail ${product.name} - 1`}
-                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
-                    />
-                  </div>
-                  <div className="aspect-square bg-gradient-to-br from-muted to-muted-foreground rounded-lg overflow-hidden">
-                    <img 
-                      src={product.details.image2}
-                      alt={`Détail ${product.name} - 2`}
-                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
-                    />
-                  </div>
-                </>
-              )}
-            </div>
+            {product.details && (
+              <div className="flex gap-2">
+                <div className="w-20 h-20 bg-gradient-to-br from-muted to-muted-foreground rounded-lg overflow-hidden flex-shrink-0">
+                  <img 
+                    src={product.details.image1}
+                    alt={`Détail ${product.name} - 1`}
+                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-300 cursor-pointer"
+                  />
+                </div>
+                <div className="w-20 h-20 bg-gradient-to-br from-muted to-muted-foreground rounded-lg overflow-hidden flex-shrink-0">
+                  <img 
+                    src={product.details.image2}
+                    alt={`Détail ${product.name} - 2`}
+                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-300 cursor-pointer"
+                  />
+                </div>
+              </div>
+            )}
           </div>
 
           <div className="space-y-6">
