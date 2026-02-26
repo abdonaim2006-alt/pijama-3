@@ -89,7 +89,7 @@ function ProductContent() {
         </Link>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-          <div className="flex items-center justify-center">
+          <div className="flex flex-col items-center justify-center space-y-4">
             <div className="w-full aspect-square bg-gradient-to-br from-muted to-muted-foreground rounded-lg flex items-center justify-center text-muted-foreground overflow-hidden">
               <img 
                 key={selectedColor}
@@ -101,6 +101,24 @@ function ProductContent() {
                   img.style.display = 'none'
                 }}
               />
+            </div>
+            
+            {/* Detail Images */}
+            <div className="w-full grid grid-cols-2 gap-3">
+              <div className="aspect-square bg-gradient-to-br from-muted to-muted-foreground rounded-lg overflow-hidden">
+                <img 
+                  src="/images/detail-1.jpg"
+                  alt="Détail du tissu - texture du tissu confortable"
+                  className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                />
+              </div>
+              <div className="aspect-square bg-gradient-to-br from-muted to-muted-foreground rounded-lg overflow-hidden">
+                <img 
+                  src="/images/detail-2.jpg"
+                  alt="Détail du confort - ceinture élastique et coutures"
+                  className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                />
+              </div>
             </div>
           </div>
 
