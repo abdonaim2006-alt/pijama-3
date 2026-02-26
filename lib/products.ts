@@ -106,7 +106,7 @@ export const products: Product[] = [
     image: 'silk-luxury',
     collection: 'premium',
     colors: ['Rose', 'beige'],
-    sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
     rating: 4.9,
     reviews: 234,
     description: 'Pyjama Femme , Automne-Printemps, hiver',
