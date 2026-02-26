@@ -27,7 +27,7 @@ function ProductContent() {
   // Map colors to image suffixes
   const colorImageMap: { [key: string]: string } = {
     'Rose': '-rose',
-    'Jaune': '-jaune',
+    'beige': '-beige',
   }
 
   useEffect(() => {
@@ -168,8 +168,8 @@ function ProductContent() {
                     key={size}
                     onClick={() => setSelectedSize(size)}
                     className={`py-2 px-3 rounded-md border-2 transition-colors ${selectedSize === size
-                        ? 'border-primary bg-primary text-white'
-                        : 'border-border bg-card text-foreground hover:border-primary'
+                      ? 'border-primary bg-primary text-white'
+                      : 'border-border bg-card text-foreground hover:border-primary'
                       }`}
                   >
                     {size}
@@ -186,7 +186,7 @@ function ProductContent() {
                 {product.colors.map(color => {
                   const colorClasses: { [key: string]: string } = {
                     'Rose': 'bg-pink-400 border-pink-500',
-                    'Jaune': 'text-beige-400 border-beige-500',
+                    'beige': 'text-beige-400 border-beige-500',
                   }
                   const classes = colorClasses[color] || 'bg-gray-400 border-gray-500'
 
