@@ -13,6 +13,10 @@ export interface Product {
   features: string[]
   inStock: boolean
   badge?: 'bestseller' | 'new' | 'sale'
+  details?: {
+    image1: string
+    image2: string
+  }
 }
 
 export const products: Product[] = [
@@ -32,6 +36,10 @@ export const products: Product[] = [
     features: ['Tissu aéré', 'Séchage rapide', 'Léger', 'Respirant'],
     inStock: true,
     badge: 'sale',
+    details: {
+      image1: '/images/details/product-1-detail-1.jpg',
+      image2: '/images/details/product-1-detail-2.jpg',
+    },
   },
   {
     id: '2',
@@ -46,6 +54,10 @@ export const products: Product[] = [
     description: 'Lin pur pour une légèreté extrême. Parfait pour l\'été.',
     features: ['Lin 100%', 'Très léger', 'Froisse naturellement', 'Écologique'],
     inStock: true,
+    details: {
+      image1: '/images/details/product-2-detail-1.jpg',
+      image2: '/images/details/product-2-detail-2.jpg',
+    },
   },
 
   // Collection Hiver - 2 produits
@@ -62,6 +74,10 @@ export const products: Product[] = [
     description: 'Pyjama chaud et douillet pour les froides nuits d\'hiver.',
     features: ['Intérieur molletonné', 'Très chaud', 'Confortable', 'Respirant'],
     inStock: true,
+    details: {
+      image1: '/images/details/product-3-detail-1.jpg',
+      image2: '/images/details/product-3-detail-2.jpg',
+    },
   },
   {
     id: '4',
@@ -76,6 +92,10 @@ export const products: Product[] = [
     description: 'Cachemire véritable pour les nuits hivernales les plus douilettes.',
     features: ['Cachemire véritable', 'Extrêmement chaud', 'Luxueux', 'Durable'],
     inStock: true,
+    details: {
+      image1: '/images/details/product-4-detail-1.jpg',
+      image2: '/images/details/product-4-detail-2.jpg',
+    },
   },
 
   // Collection Premium - 2 produits
@@ -93,6 +113,10 @@ export const products: Product[] = [
     features: ['Soie naturelle 100%', 'Anti-transpiration', 'Thermorégulation', 'Boutons nacre'],
     inStock: true,
     badge: 'bestseller',
+    details: {
+      image1: '/images/details/product-5-detail-1.jpg',
+      image2: '/images/details/product-5-detail-2.jpg',
+    },
   },
   {
     id: '6',
@@ -108,6 +132,10 @@ export const products: Product[] = [
     features: ['Coton égyptien', 'Très durable', 'Hypoallergénique', 'Anti-boulochage'],
     inStock: true,
     badge: 'bestseller',
+    details: {
+      image1: '/images/details/product-6-detail-1.jpg',
+      image2: '/images/details/product-6-detail-2.jpg',
+    },
   },
 
   // Collection Confort - 2 produits
@@ -125,6 +153,10 @@ export const products: Product[] = [
     features: ['Bambou durable', 'Écologique', 'Ultra doux', 'Thermorégulation'],
     inStock: true,
     badge: 'new',
+    details: {
+      image1: '/images/details/product-7-detail-1.jpg',
+      image2: '/images/details/product-7-detail-2.jpg',
+    },
   },
   {
     id: '8',
@@ -139,6 +171,10 @@ export const products: Product[] = [
     description: 'Microfibre extrêmement douce pour un maximum de confort.',
     features: ['Ultra doux', 'Sèche vite', 'Facile d\'entretien', 'Durable'],
     inStock: true,
+    details: {
+      image1: '/images/details/product-8-detail-1.jpg',
+      image2: '/images/details/product-8-detail-2.jpg',
+    },
   },
 ]
 

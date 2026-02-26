@@ -105,20 +105,24 @@ function ProductContent() {
             
             {/* Detail Images */}
             <div className="w-full grid grid-cols-2 gap-3">
-              <div className="aspect-square bg-gradient-to-br from-muted to-muted-foreground rounded-lg overflow-hidden">
-                <img 
-                  src="/images/detail-1.jpg"
-                  alt="Détail du tissu - texture du tissu confortable"
-                  className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
-                />
-              </div>
-              <div className="aspect-square bg-gradient-to-br from-muted to-muted-foreground rounded-lg overflow-hidden">
-                <img 
-                  src="/images/detail-2.jpg"
-                  alt="Détail du confort - ceinture élastique et coutures"
-                  className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
-                />
-              </div>
+              {product.details && (
+                <>
+                  <div className="aspect-square bg-gradient-to-br from-muted to-muted-foreground rounded-lg overflow-hidden">
+                    <img 
+                      src={product.details.image1}
+                      alt={`Détail ${product.name} - 1`}
+                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                    />
+                  </div>
+                  <div className="aspect-square bg-gradient-to-br from-muted to-muted-foreground rounded-lg overflow-hidden">
+                    <img 
+                      src={product.details.image2}
+                      alt={`Détail ${product.name} - 2`}
+                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                    />
+                  </div>
+                </>
+              )}
             </div>
           </div>
 
