@@ -91,7 +91,7 @@ function ProductContent() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
           <div className="flex flex-col items-center justify-center space-y-4">
             <div className="w-full aspect-square bg-gradient-to-br from-muted to-muted-foreground rounded-lg flex items-center justify-center text-muted-foreground overflow-hidden">
-              <img 
+              <img
                 key={selectedColor}
                 src={getImageUrl()}
                 alt={`${product.name} - ${selectedColor}`}
@@ -102,19 +102,19 @@ function ProductContent() {
                 }}
               />
             </div>
-            
+
             {/* Detail Images */}
             {product.details && (
               <div className="flex gap-2">
                 <div className="w-20 h-20 bg-gradient-to-br from-muted to-muted-foreground rounded-lg overflow-hidden flex-shrink-0">
-                  <img 
+                  <img
                     src={product.details.image1}
                     alt={`Détail ${product.name} - 1`}
                     className="w-full h-full object-cover hover:scale-110 transition-transform duration-300 cursor-pointer"
                   />
                 </div>
                 <div className="w-20 h-20 bg-gradient-to-br from-muted to-muted-foreground rounded-lg overflow-hidden flex-shrink-0">
-                  <img 
+                  <img
                     src={product.details.image2}
                     alt={`Détail ${product.name} - 2`}
                     className="w-full h-full object-cover hover:scale-110 transition-transform duration-300 cursor-pointer"
@@ -167,11 +167,10 @@ function ProductContent() {
                   <button
                     key={size}
                     onClick={() => setSelectedSize(size)}
-                    className={`py-2 px-3 rounded-md border-2 transition-colors ${
-                      selectedSize === size
+                    className={`py-2 px-3 rounded-md border-2 transition-colors ${selectedSize === size
                         ? 'border-primary bg-primary text-white'
                         : 'border-border bg-card text-foreground hover:border-primary'
-                    }`}
+                      }`}
                   >
                     {size}
                   </button>
@@ -187,24 +186,22 @@ function ProductContent() {
                 {product.colors.map(color => {
                   const colorClasses: { [key: string]: string } = {
                     'Rose': 'bg-pink-400 border-pink-500',
-                    'Jaune': 'bg-yellow-400 border-yellow-500',
+                    'Jaune': 'text-beige-400 border-beige-500',
                   }
                   const classes = colorClasses[color] || 'bg-gray-400 border-gray-500'
-                  
+
                   return (
                     <button
                       key={color}
                       onClick={() => setSelectedColor(color)}
-                      className={`flex flex-col items-center gap-2 transition-transform ${
-                        selectedColor === color ? 'scale-110' : 'hover:scale-105'
-                      }`}
+                      className={`flex flex-col items-center gap-2 transition-transform ${selectedColor === color ? 'scale-110' : 'hover:scale-105'
+                        }`}
                     >
                       <div
                         className={`w-10 h-10 rounded-full border-4 ${classes} cursor-pointer`}
                       />
-                      <span className={`text-sm font-medium ${
-                        selectedColor === color ? 'text-primary font-bold' : 'text-foreground'
-                      }`}>
+                      <span className={`text-sm font-medium ${selectedColor === color ? 'text-primary font-bold' : 'text-foreground'
+                        }`}>
                         {color}
                       </span>
                     </button>
@@ -262,7 +259,7 @@ function ProductContent() {
 
         {showOrderForm && (
           <div className="mb-16">
-            <SingleProductOrderForm 
+            <SingleProductOrderForm
               selectedModel={product.name}
               selectedSize={selectedSize}
               selectedColor={selectedColor}
