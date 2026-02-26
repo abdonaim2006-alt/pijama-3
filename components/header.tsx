@@ -23,7 +23,7 @@ export function Header() {
               alt="Lilynova Logo"
               width={160}
               height={40}
-              className="h-12 w-auto"
+              className="h-25 w-auto"
               priority
             />
           </Link>
