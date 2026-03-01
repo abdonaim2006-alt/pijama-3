@@ -7,7 +7,7 @@ import { Footer } from '@/components/footer'
 import { Button } from '@/components/ui/button'
 import { useCart } from '@/context/cart-context'
 import { useParams } from 'next/navigation'
-import { ChevronLeft, Star } from 'lucide-react'
+import { ChevronLeft, Star, X } from 'lucide-react'
 import { SingleProductOrderForm } from '@/components/single-product-order-form'
 import { products } from '@/lib/products'
 
@@ -23,6 +23,9 @@ function ProductContent() {
   const [selectedColor, setSelectedColor] = useState<string>('')
   const [addedToCart, setAddedToCart] = useState(false)
   const [showOrderForm, setShowOrderForm] = useState(false)
+  const [activeImageIndex, setActiveImageIndex] = useState(0)
+  const [showDetailModal, setShowDetailModal] = useState(false)
+  const [modalImage, setModalImage] = useState('')
 
   // Map colors to image suffixes
   const colorImageMap: { [key: string]: string } = {
@@ -80,8 +83,75 @@ function ProductContent() {
     return `/images/product-${product.id}${colorSuffix}.jpg`
   }
 
+  // Build gallery images array: color variants + detail images
+  const getGalleryImages = () => {
+    if (!product) return []
+    const images: { src: string; type: 'color' | 'detail'; color?: string }[] = []
+    
+    // Add color variant images
+    product.colors.forEach(color => {
+      const colorSuffix = colorImageMap[color] || ''
+      images.push({
+        src: `/images/product-${product.id}${colorSuffix}.jpg`,
+        type: 'color',
+        color: color
+      })
+    })
+    
+    // Add detail images
+    if (product.details) {
+      images.push({ src: product.details.image1, type: 'detail' })
+      images.push({ src: product.details.image2, type: 'detail' })
+    }
+    
+    return images
+  }
+
+  const galleryImages = getGalleryImages()
+
+  const handleThumbnailClick = (index: number) => {
+    setActiveImageIndex(index)
+    const image = galleryImages[index]
+    if (image.type === 'color' && image.color) {
+      setSelectedColor(image.color)
+    } else if (image.type === 'detail') {
+      setShowDetailModal(true)
+      setModalImage(image.src)
+    }
+  }
+
+  const handleColorChange = (color: string) => {
+    setSelectedColor(color)
+    // Find the index of this color in gallery
+    const colorIndex = galleryImages.findIndex(img => img.type === 'color' && img.color === color)
+    if (colorIndex !== -1) {
+      setActiveImageIndex(colorIndex)
+    }
+  }
+
   return (
     <main className="flex-1">
+      {/* Detail Image Modal */}
+      {showDetailModal && (
+        <div 
+          className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4"
+          onClick={() => setShowDetailModal(false)}
+        >
+          <button
+            onClick={() => setShowDetailModal(false)}
+            className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors"
+          >
+            <X className="w-8 h-8" />
+          </button>
+          <img
+            src={modalImage}
+            alt="Détail du produit"
+            className="max-w-full max-h-[90vh] object-contain rounded-lg"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Link href="/collections" className="inline-flex items-center gap-2 text-primary hover:text-primary/80 mb-6">
           <ChevronLeft className="w-4 h-4" />
@@ -90,12 +160,13 @@ function ProductContent() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
           <div className="flex flex-col items-center justify-center space-y-4">
+            {/* Main Image */}
             <div className="w-full aspect-square bg-gradient-to-br from-muted to-muted-foreground rounded-lg flex items-center justify-center text-muted-foreground overflow-hidden">
               <img
-                key={selectedColor}
-                src={getImageUrl()}
+                key={activeImageIndex}
+                src={galleryImages[activeImageIndex]?.src || getImageUrl()}
                 alt={`${product.name} - ${selectedColor}`}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transition-opacity duration-300"
                 onError={(e) => {
                   const img = e.target as HTMLImageElement
                   img.style.display = 'none'
@@ -103,25 +174,28 @@ function ProductContent() {
               />
             </div>
 
-            {/* Detail Images */}
-            {product.details && (
-              <div className="flex gap-2">
-                <div className="w-20 h-20 bg-gradient-to-br from-muted to-muted-foreground rounded-lg overflow-hidden flex-shrink-0">
-                  <img
-                    src={product.details.image1}
-                    alt={`Détail ${product.name} - 1`}
-                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-300 cursor-pointer"
-                  />
-                </div>
-                <div className="w-20 h-20 bg-gradient-to-br from-muted to-muted-foreground rounded-lg overflow-hidden flex-shrink-0">
-                  <img
-                    src={product.details.image2}
-                    alt={`Détail ${product.name} - 2`}
-                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-300 cursor-pointer"
-                  />
-                </div>
+            {/* Scrollable Thumbnails */}
+            <div className="w-full overflow-x-auto pb-2">
+              <div className="flex gap-2 min-w-max">
+                {galleryImages.map((image, index) => (
+                  <button
+                    key={index}
+                    onClick={() => handleThumbnailClick(index)}
+                    className={`w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 border-2 transition-all duration-200 ${
+                      activeImageIndex === index
+                        ? 'border-primary ring-2 ring-primary/30'
+                        : 'border-border hover:border-primary/50'
+                    }`}
+                  >
+                    <img
+                      src={image.src}
+                      alt={image.type === 'color' ? `Couleur ${image.color}` : `Détail ${index}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </button>
+                ))}
               </div>
-            )}
+            </div>
           </div>
 
           <div className="space-y-6">
@@ -193,7 +267,7 @@ function ProductContent() {
                   return (
                     <button
                       key={color}
-                      onClick={() => setSelectedColor(color)}
+                      onClick={() => handleColorChange(color)}
                       className={`flex flex-col items-center gap-2 transition-transform ${selectedColor === color ? 'scale-110' : 'hover:scale-105'
                         }`}
                     >
