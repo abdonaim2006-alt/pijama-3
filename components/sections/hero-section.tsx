@@ -20,7 +20,7 @@ export function HeroSection() {
         <div className="space-y-8 animate-in fade-in duration-1000">
           <div className="space-y-4">
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-serif font-bold text-balance leading-tight">
-              Les Pyjamas les Plus Confortables
+              Lilynova Les Pyjamas les Plus Confortables
             </h1>
             <p className="text-xl sm:text-2xl text-gray-300 text-balance max-w-3xl mx-auto">
               Dormez comme jamais avec nos pyjamas premium en tissu de haute qualité
